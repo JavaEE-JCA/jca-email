@@ -78,4 +78,8 @@ public class SendEmailApi {
         }
     }
 }
-```
+```     
+_send email:_  
+```shell script
+curl -X POST -H "Content-Type: application/json" http://localhost:8080/api/v1/email/send -d '{"subject":"Hello dear !","recipientList" : ["user@domain.com"],"content":"How are you ?","contentType":"text/plain"}'
+```  
