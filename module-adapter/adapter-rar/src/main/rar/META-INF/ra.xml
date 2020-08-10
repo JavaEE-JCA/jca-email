@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<connector xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/connector_1_7.xsd"
+           version="1.7">
+    <description>Email Resource Adapter</description>
+    <display-name>Email Resource Adapter</display-name>
+    <eis-type>Email Resource Adapter</eis-type>
+    <resourceadapter-version>1.0</resourceadapter-version>
+    <license>
+        <license-required>false</license-required>
+    </license>
+    <resourceadapter>
+        <resourceadapter-class>ir.moke.jca.adapter.EmailResourceAdapter</resourceadapter-class>
+        <outbound-resourceadapter>
+            <connection-definition>
+                <managedconnectionfactory-class>ir.moke.jca.adapter.SmtpManagedConnectionFactory
+                </managedconnectionfactory-class>
+                <connectionfactory-interface>ir.moke.jca.api.SmtpConnectionFactory</connectionfactory-interface>
+                <connectionfactory-impl-class>ir.moke.jca.adapter.SmtpConnectionFactoryImpl
+                </connectionfactory-impl-class>
+                <connection-interface>ir.moke.jca.api.SmtpConnection</connection-interface>
+                <connection-impl-class>ir.moke.jca.adapter.SmtpConnectionImpl</connection-impl-class>
+            </connection-definition>
+            <transaction-support>NoTransaction</transaction-support>
+            <reauthentication-support>false</reauthentication-support>
+        </outbound-resourceadapter>
+        <inbound-resourceadapter>
+            <messageadapter>
+                <messagelistener>
+                    <messagelistener-type>ir.moke.jca.api.MailListener</messagelistener-type>
+                    <activationspec>
+                        <activationspec-class>ir.moke.jca.adapter.EmailActivationSpec</activationspec-class>
+                    </activationspec>
+                </messagelistener>
+            </messageadapter>
+        </inbound-resourceadapter>
+    </resourceadapter>
+</connector>
