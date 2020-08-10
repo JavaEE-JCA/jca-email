@@ -10,7 +10,7 @@ Custom JavaEE 8 jca resource adapter for connecting to mail servers
 `mvn clean compile install ; (cd ear-module/ ; mvn liberty:run)`
 
 
-***Example Implementation :***      
+***Example Inbound Implementation :***      
 ```java
 @MessageDriven(
         activationConfig = {
@@ -28,6 +28,54 @@ public class GoogleGmailMDB implements MailListener {
     @Override
     public void receiveEmail(Message email) throws MessagingException {
         logger.info("[Google Gmail] Receive message subject: [" + email.getSubject() + "]");
+    }
+}
+```
+
+***Example Outbound Implementation :***    
+_liberty/openLiberty configuration (server.xml) :_      
+```xml
+<connectionFactory jndiName="eis/outlookSmtpConnection">
+        <properties.jca-application.jca-resourceAdapter
+                debug="true"
+                hostname="smtp-mail.outlook.com"
+                portNumber="587"
+                username="USERNAME"
+                password="PASSWORD"/>
+</connectionFactory>
+```       
+_TomEE 8 configuration (server.xml) :_
+```xml
+<Resource id="eis/outlookSmtpConnection" type="ir.moke.jca.api.SmtpConnectionFactory"
+              class-name="ir.moke.jca.adapter.SmtpManagedConnectionFactory">
+        ResourceAdapter=EmailResourceAdapter
+        TransactionSupport=none
+        debug=true
+        hostname=smtp-mail.outlook.com
+        portNumber=587
+        username=USERNAME
+        password=PASSWORD
+</Resource>
+```    
+_now example connectionFactory usage:_    
+```java
+@Path("email")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+public class SendEmailApi {
+
+    @Resource(name = "eis/outlookSmtpConnection")
+    private SmtpConnectionFactory scf;
+
+    @Path("send")
+    @POST
+    public void sendEmail(Email email) {
+        try {
+            SmtpConnection smtpConnection = scf.getConnection();
+            smtpConnection.sendEmail(email);
+        } catch (ResourceException e) {
+            e.printStackTrace();
+        }
     }
 }
 ```
