@@ -19,7 +19,6 @@ import ir.moke.jca.api.MailListener;
 
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
-import javax.mail.MessagingException;
 import java.util.logging.Logger;
 
 /*
@@ -43,7 +42,7 @@ public class GoogleGmailMDB implements MailListener {
     private static final Logger logger = Logger.getLogger(GoogleGmailMDB.class.getName());
 
     @Override
-    public void receiveEmail(Email email) throws MessagingException {
+    public void receiveEmail(Email email) {
         logger.info("[Google Gmail] Receive message subject: [" + email.getSubject() + "]");
     }
 }

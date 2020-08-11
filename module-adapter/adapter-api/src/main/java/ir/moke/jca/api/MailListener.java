@@ -14,8 +14,6 @@
 
 package ir.moke.jca.api;
 
-import javax.mail.MessagingException;
-
 public interface MailListener {
-    void receiveEmail(Email email) throws MessagingException;
+    void receiveEmail(Email email);
 }
