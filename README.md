@@ -26,7 +26,7 @@ public class GoogleGmailMDB implements MailListener {
     private static final Logger logger = Logger.getLogger(GoogleGmailMDB.class.getName());
 
     @Override
-    public void receiveEmail(Message email) throws MessagingException {
+    public void receiveEmail(Email email) {
         logger.info("[Google Gmail] Receive message subject: [" + email.getSubject() + "]");
     }
 }
