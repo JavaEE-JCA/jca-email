@@ -11,13 +11,13 @@ Custom JavaEE 8 jca resource adapter for connecting to mail servers
 
 
 ***Example Inbound Implementation :***      
+Note: Inbound currently use imaps protocol , target mail server must supported **_idle connection_**.
 ```java
 @MessageDriven(
         activationConfig = {
                 @ActivationConfigProperty(propertyName = "name", propertyValue = "Google Gmail"),
                 @ActivationConfigProperty(propertyName = "hostname", propertyValue = "imap.gmail.com"),
                 @ActivationConfigProperty(propertyName = "port", propertyValue = "993"),
-                @ActivationConfigProperty(propertyName = "protocol", propertyValue = "imaps"),
                 @ActivationConfigProperty(propertyName = "username", propertyValue = "USERNAME"),
                 @ActivationConfigProperty(propertyName = "password", propertyValue = "PASSWORD")
         }
