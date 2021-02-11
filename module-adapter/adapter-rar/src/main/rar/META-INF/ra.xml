@@ -27,11 +27,9 @@
         <resourceadapter-class>ir.moke.jca.adapter.EmailResourceAdapter</resourceadapter-class>
         <outbound-resourceadapter>
             <connection-definition>
-                <managedconnectionfactory-class>ir.moke.jca.adapter.SmtpManagedConnectionFactory
-                </managedconnectionfactory-class>
+                <managedconnectionfactory-class>ir.moke.jca.adapter.SmtpManagedConnectionFactory</managedconnectionfactory-class>
                 <connectionfactory-interface>ir.moke.jca.api.SmtpConnectionFactory</connectionfactory-interface>
-                <connectionfactory-impl-class>ir.moke.jca.adapter.SmtpConnectionFactoryImpl
-                </connectionfactory-impl-class>
+                <connectionfactory-impl-class>ir.moke.jca.adapter.SmtpConnectionFactoryImpl</connectionfactory-impl-class>
                 <connection-interface>ir.moke.jca.api.SmtpConnection</connection-interface>
                 <connection-impl-class>ir.moke.jca.adapter.SmtpConnectionImpl</connection-impl-class>
             </connection-definition>
